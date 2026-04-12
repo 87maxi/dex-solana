@@ -1,0 +1,1 @@
+<tool_call>edit_file<arg_key>display_description</arg_key><arg_value>Create Anchor.toml configuration file</arg_value><arg_key>path</arg_key><arg_value>dex/docs/migration-plans/solana-anchor/phase-1/Anchor.toml</arg_value><arg_key>mode</arg_key><arg_value>create</arg_value></tool_call>

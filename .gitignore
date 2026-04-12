@@ -1,0 +1,21 @@
+# Dependencies
+web/node_modules/
+web/.next/
+
+# Environment
+web/.env.local
+web/.env
+
+# Foundry
+dex/out/
+dex/cache/
+dex/broadcast/
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+.surfpool/

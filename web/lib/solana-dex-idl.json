@@ -1,0 +1,1093 @@
+{
+  "address": "5p8iy2yZWb4xjHj17AAoZwAFzFY4Zh4c2e3dV32uRRH3",
+  "metadata": {
+    "name": "solana_dex",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "add_liquidity",
+      "discriminator": [
+        181,
+        157,
+        89,
+        67,
+        143,
+        182,
+        52,
+        72
+      ],
+      "accounts": [
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_lp",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114,
+                  95,
+                  108,
+                  112
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              },
+              {
+                "kind": "account",
+                "path": "config"
+              }
+            ]
+          }
+        },
+        {
+          "name": "token_a_mint",
+          "docs": [
+            "Token A mint account"
+          ],
+          "writable": true
+        },
+        {
+          "name": "token_b_mint",
+          "docs": [
+            "Token B mint account"
+          ],
+          "writable": true
+        },
+        {
+          "name": "user_token_a",
+          "docs": [
+            "User's Token A account"
+          ],
+          "writable": true
+        },
+        {
+          "name": "user_token_b",
+          "docs": [
+            "User's Token B account"
+          ],
+          "writable": true
+        },
+        {
+          "name": "dex_token_a",
+          "docs": [
+            "DEX's Token A vault"
+          ],
+          "writable": true
+        },
+        {
+          "name": "dex_token_b",
+          "docs": [
+            "DEX's Token B vault"
+          ],
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount_a",
+          "type": "u64"
+        },
+        {
+          "name": "amount_b",
+          "type": "u64"
+        }
+      ],
+      "returns": "u64"
+    },
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "config",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "lp_mint",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  112,
+                  95,
+                  109,
+                  105,
+                  110,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_lp",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114,
+                  95,
+                  108,
+                  112
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "lp_mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "remove_liquidity",
+      "discriminator": [
+        80,
+        85,
+        209,
+        72,
+        24,
+        206,
+        177,
+        108
+      ],
+      "accounts": [
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "lp_mint",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  112,
+                  95,
+                  109,
+                  105,
+                  110,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_lp",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114,
+                  95,
+                  108,
+                  112
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              },
+              {
+                "kind": "account",
+                "path": "config"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_lp_token_account",
+          "docs": [
+            "User's LP token account (to burn)"
+          ],
+          "writable": true
+        },
+        {
+          "name": "user_token_a",
+          "docs": [
+            "User's Token A account (to receive)"
+          ],
+          "writable": true
+        },
+        {
+          "name": "user_token_b",
+          "docs": [
+            "User's Token B account (to receive)"
+          ],
+          "writable": true
+        },
+        {
+          "name": "dex_token_a",
+          "docs": [
+            "DEX's Token A vault"
+          ],
+          "writable": true
+        },
+        {
+          "name": "dex_token_b",
+          "docs": [
+            "DEX's Token B vault"
+          ],
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "lp_amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "swap",
+      "discriminator": [
+        248,
+        198,
+        158,
+        145,
+        225,
+        117,
+        135,
+        200
+      ],
+      "accounts": [
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_token_in",
+          "docs": [
+            "User's token account (source)"
+          ],
+          "writable": true
+        },
+        {
+          "name": "user_token_out",
+          "docs": [
+            "User's token account (destination)"
+          ],
+          "writable": true
+        },
+        {
+          "name": "dex_vault_in",
+          "docs": [
+            "DEX's vault for the input token"
+          ],
+          "writable": true
+        },
+        {
+          "name": "dex_vault_out",
+          "docs": [
+            "DEX's vault for the output token"
+          ],
+          "writable": true
+        },
+        {
+          "name": "token_a_mint",
+          "docs": [
+            "Token A mint"
+          ],
+          "writable": true
+        },
+        {
+          "name": "token_b_mint",
+          "docs": [
+            "Token B mint"
+          ],
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "token_in",
+          "type": "u8"
+        },
+        {
+          "name": "amount_in",
+          "type": "u64"
+        }
+      ],
+      "returns": "u64"
+    },
+    {
+      "name": "withdraw_protocol_fees",
+      "discriminator": [
+        11,
+        68,
+        165,
+        98,
+        18,
+        208,
+        134,
+        73
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner_token_a",
+          "docs": [
+            "Owner's Token A account"
+          ],
+          "writable": true
+        },
+        {
+          "name": "owner_token_b",
+          "docs": [
+            "Owner's Token B account"
+          ],
+          "writable": true
+        },
+        {
+          "name": "dex_token_a",
+          "docs": [
+            "DEX's Token A vault"
+          ],
+          "writable": true
+        },
+        {
+          "name": "dex_token_b",
+          "docs": [
+            "DEX's Token B vault"
+          ],
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Config",
+      "discriminator": [
+        155,
+        12,
+        170,
+        224,
+        30,
+        250,
+        204,
+        130
+      ]
+    },
+    {
+      "name": "LpMint",
+      "discriminator": [
+        224,
+        144,
+        126,
+        139,
+        133,
+        185,
+        3,
+        28
+      ]
+    },
+    {
+      "name": "Pool",
+      "discriminator": [
+        241,
+        154,
+        109,
+        4,
+        17,
+        177,
+        109,
+        188
+      ]
+    },
+    {
+      "name": "UserLpToken",
+      "discriminator": [
+        197,
+        215,
+        162,
+        145,
+        10,
+        196,
+        247,
+        201
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "AddLiquidityEvent",
+      "discriminator": [
+        27,
+        178,
+        153,
+        186,
+        47,
+        196,
+        140,
+        45
+      ]
+    },
+    {
+      "name": "ProtocolFeesWithdrawnEvent",
+      "discriminator": [
+        142,
+        109,
+        101,
+        78,
+        169,
+        208,
+        188,
+        216
+      ]
+    },
+    {
+      "name": "RemoveLiquidityEvent",
+      "discriminator": [
+        141,
+        199,
+        182,
+        123,
+        159,
+        94,
+        215,
+        102
+      ]
+    },
+    {
+      "name": "SwapEvent",
+      "discriminator": [
+        64,
+        198,
+        205,
+        232,
+        38,
+        8,
+        113,
+        226
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidAmount",
+      "msg": "Invalid amount"
+    },
+    {
+      "code": 6001,
+      "name": "InsufficientOutput",
+      "msg": "Insufficient output amount"
+    },
+    {
+      "code": 6002,
+      "name": "InsufficientLiquidity",
+      "msg": "Insufficient liquidity"
+    },
+    {
+      "code": 6003,
+      "name": "PoolNotInitialized",
+      "msg": "Pool not initialized"
+    },
+    {
+      "code": 6004,
+      "name": "InvalidAmounts",
+      "msg": "Invalid token amounts"
+    },
+    {
+      "code": 6005,
+      "name": "OnlyOwnerCanWithdraw",
+      "msg": "Only owner can withdraw fees"
+    },
+    {
+      "code": 6006,
+      "name": "NoFeesToWithdraw",
+      "msg": "No fees to withdraw"
+    },
+    {
+      "code": 6007,
+      "name": "InsufficientUserLPBalance",
+      "msg": "Insufficient user LP balance"
+    },
+    {
+      "code": 6008,
+      "name": "InsufficientLPTokensBurned",
+      "msg": "Insufficient LP tokens burned"
+    },
+    {
+      "code": 6009,
+      "name": "LPMintAlreadyInitialized",
+      "msg": "LP mint already initialized"
+    },
+    {
+      "code": 6010,
+      "name": "TokenAccountsNotProvided",
+      "msg": "Token accounts not provided"
+    },
+    {
+      "code": 6011,
+      "name": "Overflow",
+      "msg": "Overflow occurred"
+    },
+    {
+      "code": 6012,
+      "name": "Underflow",
+      "msg": "Underflow occurred"
+    }
+  ],
+  "types": [
+    {
+      "name": "AddLiquidityEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount_a",
+            "type": "u64"
+          },
+          {
+            "name": "amount_b",
+            "type": "u64"
+          },
+          {
+            "name": "lp_minted",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Config",
+      "docs": [
+        "Configuration account for the DEX program"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "docs": [
+              "Owner of the DEX (can withdraw protocol fees)"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "total_lp_supply",
+            "docs": [
+              "Total LP tokens supply"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "total_fee",
+            "docs": [
+              "Fee constants (stored as basis points * 100 to avoid decimals)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "protocol_fee",
+            "type": "u64"
+          },
+          {
+            "name": "lp_fee",
+            "type": "u64"
+          },
+          {
+            "name": "fee_denominator",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LpMint",
+      "docs": [
+        "LP Token mint account"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "program_id",
+            "docs": [
+              "Program ID"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "token_a_mint",
+            "docs": [
+              "Token A mint"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "token_b_mint",
+            "docs": [
+              "Token B mint"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "total_supply",
+            "docs": [
+              "Total LP tokens supply"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "decimals",
+            "docs": [
+              "Decimal precision"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pool",
+      "docs": [
+        "Pool account holding token reserves"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "program_id",
+            "docs": [
+              "Program ID"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "token_a_mint",
+            "docs": [
+              "Token A mint"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "token_b_mint",
+            "docs": [
+              "Token B mint"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "token_a_reserve",
+            "docs": [
+              "Reserve of Token A"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "token_b_reserve",
+            "docs": [
+              "Reserve of Token B"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "protocol_fee_a",
+            "docs": [
+              "Protocol fees accumulated in Token A"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "protocol_fee_b",
+            "docs": [
+              "Protocol fees accumulated in Token B"
+            ],
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProtocolFeesWithdrawnEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "fee_a",
+            "type": "u64"
+          },
+          {
+            "name": "fee_b",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RemoveLiquidityEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "lp_burned",
+            "type": "u64"
+          },
+          {
+            "name": "amount_a",
+            "type": "u64"
+          },
+          {
+            "name": "amount_b",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SwapEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "token_in",
+            "type": "pubkey"
+          },
+          {
+            "name": "token_out",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount_in",
+            "type": "u64"
+          },
+          {
+            "name": "amount_out",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UserLpToken",
+      "docs": [
+        "User LP token balance"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "docs": [
+              "Owner of the LP tokens"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "mint",
+            "docs": [
+              "LP token mint"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "balance",
+            "docs": [
+              "Balance of LP tokens"
+            ],
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ]
+}

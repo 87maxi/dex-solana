@@ -1,0 +1,15 @@
+    Finished `release` profile [optimized] target(s) in 0.25s
+   Compiling anchor-syn v0.32.1
+   Compiling anchor-attribute-program v0.32.1
+   Compiling anchor-attribute-error v0.32.1
+   Compiling anchor-attribute-event v0.32.1
+   Compiling anchor-derive-serde v0.32.1
+   Compiling anchor-attribute-constant v0.32.1
+   Compiling anchor-derive-accounts v0.32.1
+   Compiling anchor-attribute-account v0.32.1
+   Compiling anchor-attribute-access-control v0.32.1
+   Compiling anchor-lang v0.32.1
+   Compiling anchor-spl v0.32.1
+   Compiling solana-dex v0.1.0 (/home/maxi/Documentos/source/codecrypto/rust/eth-projects/dex-solana/solana-dex/programs/solana-dex)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 6.03s
+     Running unittests src/lib.rs (/home/maxi/Documentos/source/codecrypto/rust/eth-projects/dex-solana/solana-dex/target/debug/deps/solana_dex-0874465275566ee0)
