@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
-import { Providers } from "@/app/providers";
 import "./globals.css";
+import { Providers } from "./providers";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-sans",
@@ -24,7 +24,7 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>): React.ReactNode {
+}>) {
   return (
     <html
       lang="en"

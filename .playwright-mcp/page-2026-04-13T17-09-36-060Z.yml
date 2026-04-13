@@ -1,0 +1,487 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - region
+    - generic [ref=e3]:
+      - link "Skip to content" [ref=e4] [cursor=pointer]:
+        - /url: "#start-of-content"
+      - banner [ref=e6]:
+        - heading "Navigation Menu" [level=2] [ref=e7]
+        - generic [ref=e9]:
+          - button "Toggle navigation" [ref=e11] [cursor=pointer]
+          - link "Homepage" [ref=e17] [cursor=pointer]:
+            - /url: /
+            - img [ref=e18]
+          - generic [ref=e20]:
+            - link "Sign in" [ref=e21] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fanza-xyz%2Fwallet-adapter%2Ftree%2Fmaster%2Fpackages%2Fwallets
+            - button "Appearance settings" [ref=e24] [cursor=pointer]:
+              - img
+    - main [ref=e28]:
+      - generic [ref=e29]:
+        - generic [ref=e30]:
+          - generic [ref=e32]:
+            - img [ref=e33]
+            - link "anza-xyz" [ref=e36] [cursor=pointer]:
+              - /url: /anza-xyz
+            - generic [ref=e37]: /
+            - strong [ref=e38]:
+              - link "wallet-adapter" [ref=e39] [cursor=pointer]:
+                - /url: /anza-xyz/wallet-adapter
+            - generic [ref=e40]: Public
+          - generic [ref=e41]:
+            - list:
+              - listitem [ref=e42]:
+                - link "You must be signed in to change notification settings" [ref=e43] [cursor=pointer]:
+                  - /url: /login?return_to=%2Fanza-xyz%2Fwallet-adapter
+                  - img [ref=e44]
+                  - text: Notifications
+              - listitem [ref=e46]:
+                - link "Fork 1.1k" [ref=e47] [cursor=pointer]:
+                  - /url: /login?return_to=%2Fanza-xyz%2Fwallet-adapter
+                  - img [ref=e48]
+                  - text: Fork
+                  - generic "1,056" [ref=e50]: 1.1k
+              - listitem [ref=e51]:
+                - link "You must be signed in to star a repository" [ref=e53] [cursor=pointer]:
+                  - /url: /login?return_to=%2Fanza-xyz%2Fwallet-adapter
+                  - img [ref=e54]
+                  - text: Star
+                  - generic "2007 users starred this repository" [ref=e56]: 2k
+        - navigation "Repository" [ref=e57]:
+          - list [ref=e58]:
+            - listitem [ref=e59]:
+              - link "Code" [ref=e60] [cursor=pointer]:
+                - /url: /anza-xyz/wallet-adapter
+                - img [ref=e61]
+                - generic [ref=e63]: Code
+            - listitem [ref=e64]:
+              - link "Issues 19" [ref=e65] [cursor=pointer]:
+                - /url: /anza-xyz/wallet-adapter/issues
+                - img [ref=e66]
+                - generic [ref=e69]: Issues
+                - generic "19" [ref=e70]
+            - listitem [ref=e71]:
+              - link "Pull requests 27" [ref=e72] [cursor=pointer]:
+                - /url: /anza-xyz/wallet-adapter/pulls
+                - img [ref=e73]
+                - generic [ref=e75]: Pull requests
+                - generic "27" [ref=e76]
+            - listitem [ref=e77]:
+              - link "Actions" [ref=e78] [cursor=pointer]:
+                - /url: /anza-xyz/wallet-adapter/actions
+                - img [ref=e79]
+                - generic [ref=e81]: Actions
+            - listitem [ref=e82]:
+              - link "Projects" [ref=e83] [cursor=pointer]:
+                - /url: /anza-xyz/wallet-adapter/projects
+                - img [ref=e84]
+                - generic [ref=e86]: Projects
+            - listitem [ref=e87]:
+              - link "Security and quality" [ref=e88] [cursor=pointer]:
+                - /url: /anza-xyz/wallet-adapter/security
+                - img [ref=e89]
+                - generic [ref=e91]: Security and quality
+            - listitem [ref=e92]
+          - button "Additional navigation options" [ref=e96] [cursor=pointer]:
+            - img
+      - generic [ref=e107]:
+        - generic [ref=e111]:
+          - generic [ref=e112]:
+            - heading "Expand file tree" [level=2] [ref=e114]:
+              - button "Expand file tree" [ref=e115] [cursor=pointer]:
+                - img [ref=e116]
+            - button "master branch" [ref=e120] [cursor=pointer]:
+              - generic [ref=e121]:
+                - generic [ref=e123]:
+                  - img [ref=e125]
+                  - generic [ref=e128]: master
+                - generic:
+                  - img
+            - generic [ref=e130]:
+              - navigation "Breadcrumbs" [ref=e131]:
+                - heading "Breadcrumbs" [level=2] [ref=e132]
+                - list [ref=e133]:
+                  - listitem [ref=e134]:
+                    - link "wallet-adapter" [ref=e135] [cursor=pointer]:
+                      - /url: /anza-xyz/wallet-adapter/tree/master
+                  - listitem [ref=e136]:
+                    - text: /
+                    - link "packages" [ref=e137] [cursor=pointer]:
+                      - /url: /anza-xyz/wallet-adapter/tree/master/packages
+              - generic [ref=e138]:
+                - text: /
+                - heading "wallets" [level=1] [ref=e139]
+                - text: /
+              - button "Copy path" [ref=e140] [cursor=pointer]:
+                - img [ref=e141]
+          - generic [ref=e146]:
+            - heading "Directory actions" [level=2] [ref=e147]
+            - generic [ref=e150]:
+              - img [ref=e152]
+              - combobox "Go to file" [ref=e154]
+            - heading "More options" [level=2] [ref=e155]
+            - button "More options" [ref=e156] [cursor=pointer]:
+              - img [ref=e157]
+        - generic [ref=e159]:
+          - generic [ref=e161]:
+            - heading "Latest commit" [level=2] [ref=e162]
+            - generic [ref=e165]:
+              - heading "History" [level=2] [ref=e166]
+              - link "View commit history for this file." [ref=e168] [cursor=pointer]:
+                - /url: /anza-xyz/wallet-adapter/commits/master/packages/wallets
+                - generic [ref=e169]:
+                  - generic:
+                    - img
+          - generic [ref=e171]:
+            - heading "Folders and files" [level=2] [ref=e172]
+            - table "Folders and files" [ref=e173]:
+              - rowgroup [ref=e174]:
+                - row "Name Last commit message Last commit date" [ref=e175]:
+                  - columnheader "Name" [ref=e176]
+                  - columnheader "Last commit message" [ref=e177]:
+                    - generic "Last commit message" [ref=e178]
+                  - columnheader "Last commit date" [ref=e179]:
+                    - generic "Last commit date" [ref=e180]
+              - rowgroup [ref=e181]:
+                - row "parent directory Parent directory" [ref=e182]:
+                  - cell "parent directory Parent directory" [ref=e183]:
+                    - heading "parent directory" [level=3] [ref=e184]
+                    - link "Parent directory" [ref=e185] [cursor=pointer]:
+                      - /url: /anza-xyz/wallet-adapter/tree/master/packages
+                      - generic [ref=e186]:
+                        - img [ref=e187]
+                        - text: ..
+                - row "alpha, (Directory)" [ref=e189]:
+                  - cell "alpha, (Directory)" [ref=e190]:
+                    - generic [ref=e191]:
+                      - img [ref=e192]
+                      - link "alpha, (Directory)" [ref=e197] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/alpha
+                        - text: alpha
+                  - cell [ref=e198]
+                  - cell [ref=e200]
+                - row "avana, (Directory)" [ref=e203]:
+                  - cell "avana, (Directory)" [ref=e204]:
+                    - generic [ref=e205]:
+                      - img [ref=e206]
+                      - link "avana, (Directory)" [ref=e211] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/avana
+                        - text: avana
+                  - cell [ref=e212]
+                  - cell [ref=e214]
+                - row "bitkeep, (Directory)" [ref=e217]:
+                  - cell "bitkeep, (Directory)" [ref=e218]:
+                    - generic [ref=e219]:
+                      - img [ref=e220]
+                      - link "bitkeep, (Directory)" [ref=e225] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/bitkeep
+                        - text: bitkeep
+                  - cell [ref=e226]
+                  - cell [ref=e228]
+                - row "bitpie, (Directory)" [ref=e231]:
+                  - cell "bitpie, (Directory)" [ref=e232]:
+                    - generic [ref=e233]:
+                      - img [ref=e234]
+                      - link "bitpie, (Directory)" [ref=e239] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/bitpie
+                        - text: bitpie
+                  - cell [ref=e240]
+                  - cell [ref=e242]
+                - row "clover, (Directory)" [ref=e245]:
+                  - cell "clover, (Directory)" [ref=e246]:
+                    - generic [ref=e247]:
+                      - img [ref=e248]
+                      - link "clover, (Directory)" [ref=e253] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/clover
+                        - text: clover
+                  - cell [ref=e254]
+                  - cell [ref=e256]
+                - row "coin98, (Directory)" [ref=e259]:
+                  - cell "coin98, (Directory)" [ref=e260]:
+                    - generic [ref=e261]:
+                      - img [ref=e262]
+                      - link "coin98, (Directory)" [ref=e267] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/coin98
+                        - text: coin98
+                  - cell [ref=e268]
+                  - cell [ref=e270]
+                - row "coinbase, (Directory)" [ref=e273]:
+                  - cell "coinbase, (Directory)" [ref=e274]:
+                    - generic [ref=e275]:
+                      - img [ref=e276]
+                      - link "coinbase, (Directory)" [ref=e281] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/coinbase
+                        - text: coinbase
+                  - cell [ref=e282]
+                  - cell [ref=e284]
+                - row "coinhub, (Directory)" [ref=e287]:
+                  - cell "coinhub, (Directory)" [ref=e288]:
+                    - generic [ref=e289]:
+                      - img [ref=e290]
+                      - link "coinhub, (Directory)" [ref=e295] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/coinhub
+                        - text: coinhub
+                  - cell [ref=e296]
+                  - cell [ref=e298]
+                - row "fractal, (Directory)" [ref=e301]:
+                  - cell "fractal, (Directory)" [ref=e302]:
+                    - generic [ref=e303]:
+                      - img [ref=e304]
+                      - link "fractal, (Directory)" [ref=e309] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/fractal
+                        - text: fractal
+                  - cell [ref=e310]
+                  - cell [ref=e312]
+                - row "huobi, (Directory)" [ref=e315]:
+                  - cell "huobi, (Directory)" [ref=e316]:
+                    - generic [ref=e317]:
+                      - img [ref=e318]
+                      - link "huobi, (Directory)" [ref=e323] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/huobi
+                        - text: huobi
+                  - cell [ref=e324]
+                  - cell [ref=e326]
+                - row "hyperpay, (Directory)" [ref=e329]:
+                  - cell "hyperpay, (Directory)" [ref=e330]:
+                    - generic [ref=e331]:
+                      - img [ref=e332]
+                      - link "hyperpay, (Directory)" [ref=e337] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/hyperpay
+                        - text: hyperpay
+                  - cell [ref=e338]
+                  - cell [ref=e340]
+                - row "keystone, (Directory)" [ref=e343]:
+                  - cell "keystone, (Directory)" [ref=e344]:
+                    - generic [ref=e345]:
+                      - img [ref=e346]
+                      - link "keystone, (Directory)" [ref=e351] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/keystone
+                        - text: keystone
+                  - cell [ref=e352]
+                  - cell [ref=e354]
+                - row "krystal, (Directory)" [ref=e357]:
+                  - cell "krystal, (Directory)" [ref=e358]:
+                    - generic [ref=e359]:
+                      - img [ref=e360]
+                      - link "krystal, (Directory)" [ref=e365] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/krystal
+                        - text: krystal
+                  - cell [ref=e366]
+                  - cell [ref=e368]
+                - row "ledger, (Directory)" [ref=e371]:
+                  - cell "ledger, (Directory)" [ref=e372]:
+                    - generic [ref=e373]:
+                      - img [ref=e374]
+                      - link "ledger, (Directory)" [ref=e379] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/ledger
+                        - text: ledger
+                  - cell [ref=e380]
+                  - cell [ref=e382]
+                - row "mathwallet, (Directory)" [ref=e385]:
+                  - cell "mathwallet, (Directory)" [ref=e386]:
+                    - generic [ref=e387]:
+                      - img [ref=e388]
+                      - link "mathwallet, (Directory)" [ref=e393] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/mathwallet
+                        - text: mathwallet
+                  - cell [ref=e394]
+                  - cell [ref=e396]
+                - row "neko, (Directory)" [ref=e399]:
+                  - cell "neko, (Directory)" [ref=e400]:
+                    - generic [ref=e401]:
+                      - img [ref=e402]
+                      - link "neko, (Directory)" [ref=e407] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/neko
+                        - text: neko
+                  - cell [ref=e408]
+                  - cell [ref=e410]
+                - row "nightly, (Directory)" [ref=e413]:
+                  - cell "nightly, (Directory)" [ref=e414]:
+                    - generic [ref=e415]:
+                      - img [ref=e416]
+                      - link "nightly, (Directory)" [ref=e421] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/nightly
+                        - text: nightly
+                  - cell [ref=e422]
+                  - cell [ref=e424]
+                - row "nufi, (Directory)" [ref=e427]:
+                  - cell "nufi, (Directory)" [ref=e428]:
+                    - generic [ref=e429]:
+                      - img [ref=e430]
+                      - link "nufi, (Directory)" [ref=e435] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/nufi
+                        - text: nufi
+                  - cell [ref=e436]
+                  - cell [ref=e438]
+                - row "onto, (Directory)" [ref=e441]:
+                  - cell "onto, (Directory)" [ref=e442]:
+                    - generic [ref=e443]:
+                      - img [ref=e444]
+                      - link "onto, (Directory)" [ref=e449] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/onto
+                        - text: onto
+                  - cell [ref=e450]
+                  - cell [ref=e452]
+                - row "particle, (Directory)" [ref=e455]:
+                  - cell "particle, (Directory)" [ref=e456]:
+                    - generic [ref=e457]:
+                      - img [ref=e458]
+                      - link "particle, (Directory)" [ref=e463] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/particle
+                        - text: particle
+                  - cell [ref=e464]
+                  - cell [ref=e466]
+                - row "phantom, (Directory)" [ref=e469]:
+                  - cell "phantom, (Directory)" [ref=e470]:
+                    - generic [ref=e471]:
+                      - img [ref=e472]
+                      - link "phantom, (Directory)" [ref=e477] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/phantom
+                        - text: phantom
+                  - cell [ref=e478]
+                  - cell [ref=e480]
+                - row "safepal, (Directory)" [ref=e483]:
+                  - cell "safepal, (Directory)" [ref=e484]:
+                    - generic [ref=e485]:
+                      - img [ref=e486]
+                      - link "safepal, (Directory)" [ref=e491] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/safepal
+                        - text: safepal
+                  - cell [ref=e492]
+                  - cell [ref=e494]
+                - row "saifu, (Directory)" [ref=e497]:
+                  - cell "saifu, (Directory)" [ref=e498]:
+                    - generic [ref=e499]:
+                      - img [ref=e500]
+                      - link "saifu, (Directory)" [ref=e505] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/saifu
+                        - text: saifu
+                  - cell [ref=e506]
+                  - cell [ref=e508]
+                - row "salmon, (Directory)" [ref=e511]:
+                  - cell "salmon, (Directory)" [ref=e512]:
+                    - generic [ref=e513]:
+                      - img [ref=e514]
+                      - link "salmon, (Directory)" [ref=e519] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/salmon
+                        - text: salmon
+                  - cell [ref=e520]
+                  - cell [ref=e522]
+                - row "sky, (Directory)" [ref=e525]:
+                  - cell "sky, (Directory)" [ref=e526]:
+                    - generic [ref=e527]:
+                      - img [ref=e528]
+                      - link "sky, (Directory)" [ref=e533] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/sky
+                        - text: sky
+                  - cell [ref=e534]
+                  - cell [ref=e536]
+                - row "solflare, (Directory)" [ref=e539]:
+                  - cell "solflare, (Directory)" [ref=e540]:
+                    - generic [ref=e541]:
+                      - img [ref=e542]
+                      - link "solflare, (Directory)" [ref=e547] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/solflare
+                        - text: solflare
+                  - cell [ref=e548]
+                  - cell [ref=e550]
+                - row "solong, (Directory)" [ref=e553]:
+                  - cell "solong, (Directory)" [ref=e554]:
+                    - generic [ref=e555]:
+                      - img [ref=e556]
+                      - link "solong, (Directory)" [ref=e561] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/solong
+                        - text: solong
+                  - cell [ref=e562]
+                  - cell [ref=e564]
+                - row "spot, (Directory)" [ref=e567]:
+                  - cell "spot, (Directory)" [ref=e568]:
+                    - generic [ref=e569]:
+                      - img [ref=e570]
+                      - link "spot, (Directory)" [ref=e575] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/spot
+                        - text: spot
+                  - cell [ref=e576]
+                  - cell [ref=e578]
+                - row "tokenary, (Directory)" [ref=e581]:
+                  - cell "tokenary, (Directory)" [ref=e582]:
+                    - generic [ref=e583]:
+                      - img [ref=e584]
+                      - link "tokenary, (Directory)" [ref=e589] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/tokenary
+                        - text: tokenary
+                  - cell [ref=e590]
+                  - cell [ref=e592]
+                - row "tokenpocket, (Directory)" [ref=e595]:
+                  - cell "tokenpocket, (Directory)" [ref=e596]:
+                    - generic [ref=e597]:
+                      - img [ref=e598]
+                      - link "tokenpocket, (Directory)" [ref=e603] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/tokenpocket
+                        - text: tokenpocket
+                  - cell [ref=e604]
+                  - cell [ref=e606]
+                - row "torus, (Directory)" [ref=e609]:
+                  - cell "torus, (Directory)" [ref=e610]:
+                    - generic [ref=e611]:
+                      - img [ref=e612]
+                      - link "torus, (Directory)" [ref=e617] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/torus
+                        - text: torus
+                  - cell [ref=e618]
+                  - cell [ref=e620]
+                - row "trezor, (Directory)" [ref=e623]:
+                  - cell "trezor, (Directory)" [ref=e624]:
+                    - generic [ref=e625]:
+                      - img [ref=e626]
+                      - link "trezor, (Directory)" [ref=e631] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/trezor
+                        - text: trezor
+                  - cell [ref=e632]
+                  - cell [ref=e634]
+                - row "trust, (Directory)" [ref=e637]:
+                  - cell "trust, (Directory)" [ref=e638]:
+                    - generic [ref=e639]:
+                      - img [ref=e640]
+                      - link "trust, (Directory)" [ref=e645] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/trust
+                        - text: trust
+                  - cell [ref=e646]
+                  - cell [ref=e648]
+                - row "unsafe-burner, (Directory)" [ref=e651]:
+                  - cell "unsafe-burner, (Directory)" [ref=e652]:
+                    - generic [ref=e653]:
+                      - img [ref=e654]
+                      - link "unsafe-burner, (Directory)" [ref=e659] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/unsafe-burner
+                        - text: unsafe-burner
+                  - cell [ref=e660]
+                  - cell [ref=e662]
+                - row "walletconnect, (Directory)" [ref=e665]:
+                  - cell "walletconnect, (Directory)" [ref=e666]:
+                    - generic [ref=e667]:
+                      - img [ref=e668]
+                      - link "walletconnect, (Directory)" [ref=e673] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/walletconnect
+                        - text: walletconnect
+                  - cell [ref=e674]
+                  - cell [ref=e676]
+                - row "wallets, (Directory)" [ref=e679]:
+                  - cell "wallets, (Directory)" [ref=e680]:
+                    - generic [ref=e681]:
+                      - img [ref=e682]
+                      - link "wallets, (Directory)" [ref=e687] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/wallets
+                        - text: wallets
+                  - cell [ref=e688]
+                  - cell [ref=e690]
+                - row "xdefi, (Directory)" [ref=e693]:
+                  - cell "xdefi, (Directory)" [ref=e694]:
+                    - generic [ref=e695]:
+                      - img [ref=e696]
+                      - link "xdefi, (Directory)" [ref=e701] [cursor=pointer]:
+                        - /url: /anza-xyz/wallet-adapter/tree/master/packages/wallets/xdefi
+                        - text: xdefi
+                  - cell [ref=e702]
+                  - cell [ref=e704]
+  - alert [ref=e710]
