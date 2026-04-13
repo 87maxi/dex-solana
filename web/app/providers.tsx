@@ -2,7 +2,7 @@
 
 import { type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { AgnosticWalletProvider } from "@/lib/agnostic-wallet-context";
+import { AgnosticWalletProvider } from "@/providers/AgnosticWalletProvider";
 
 const queryClient = new QueryClient();
 

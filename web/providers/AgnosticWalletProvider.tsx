@@ -2,10 +2,9 @@
 
 import { createContext, useContext, useMemo, ReactNode } from 'react';
 import { WagmiProvider, useAccount, useConnect, useDisconnect } from 'wagmi';
-import { config } from './wagmi-config';
-import { SolanaWalletAdapterProvider } from './wallet-adapter-config';
-import { WalletProvider as SolanaWalletProvider, useWallet } from '@solana/wallet-adapter-react';
-import { WalletProvider } from './wallet-context';
+import { config } from '@/lib/config/wagmi-config';
+import { SolanaWalletAdapterProvider } from '@/lib/config/wallet-adapter-config';
+import { useWallet } from '@solana/wallet-adapter-react';
 
 interface AgnosticWalletContextType {
   address: string | null;
@@ -22,9 +21,7 @@ export function AgnosticWalletProvider({ children }: { children: ReactNode }) {
   return (
     <WagmiProvider config={config}>
       <SolanaWalletAdapterProvider>
-        <WalletProvider>
-          <AgnosticWalletInner>{children}</AgnosticWalletInner>
-        </WalletProvider>
+        <AgnosticWalletInner>{children}</AgnosticWalletInner>
       </SolanaWalletAdapterProvider>
     </WagmiProvider>
   );
@@ -57,7 +54,7 @@ function AgnosticWalletInner({ children }: { children: ReactNode }) {
       address,
       isConnected,
       chainType,
-      isConnecting: isEvmConnecting, // Simplified
+      isConnecting: isEvmConnecting || !!(wallet && !isSolanaConnected),
       connect: async (_type: 'solana' | 'evm') => {
         // Handled by the Modal
       },

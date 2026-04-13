@@ -1,7 +1,7 @@
 "use client";
 
-import { Header } from "@/components/Header";
-import { SwapCard } from "@/components/SwapCard";
+import { Header } from "@/components/layout/Header";
+import { SwapCard } from "@/components/features/swap/SwapCard";
 
 export default function Home() {
   return (

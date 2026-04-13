@@ -1,6 +1,6 @@
 // Solana Configuration
 export const SOLANA_RPC_URL =
-  process.env.NEXT_PUBLIC_SOLANA_RPC_URL ?? "https://api.devnet.solana.com";
+  process.env.NEXT_PUBLIC_SOLANA_RPC_URL ?? "http://127.0.0.1:8899";
 
 export const DEX_PROGRAM_ID =
   process.env.NEXT_PUBLIC_DEX_PROGRAM_ID ?? "5p8iy2yZWb4xjHj17AAoZwAFzFY4Zh4c2e3dV32uRRH3";

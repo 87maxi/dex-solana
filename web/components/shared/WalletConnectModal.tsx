@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useAgnosticWallet } from '@/lib/agnostic-wallet-context';
+import { useAgnosticWallet } from '@/providers/AgnosticWalletProvider';
 import { useConnect } from 'wagmi';
 import { useWallet } from '@solana/wallet-adapter-react';
 import {
@@ -33,7 +33,7 @@ export function WalletConnectModal() {
     const handleSolanaConnect = async (walletName: any) => {
         try {
             select(walletName);
-            // The adapter will handle the connection
+            await solanaConnect();
             setOpen(false);
         } catch (error) {
             console.error('Solana connection error:', error);

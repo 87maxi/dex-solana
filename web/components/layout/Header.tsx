@@ -1,7 +1,7 @@
 'use client';
 
-import { useAgnosticWallet } from "@/lib/agnostic-wallet-context";
-import { WalletConnectModal } from "@/components/WalletConnectModal";
+import { useAgnosticWallet } from "@/providers/AgnosticWalletProvider";
+import { WalletConnectModal } from "@/components/shared/WalletConnectModal";
 
 export function Header(): React.ReactNode {
   const { address, isConnected, disconnect, isConnecting, chainType } = useAgnosticWallet();
@@ -42,7 +42,7 @@ export function Header(): React.ReactNode {
           {isConnected && (
             <div className={`hidden sm:flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium ${chainType === 'solana' ? 'bg-teal-50 text-teal' : 'bg-indigo-50 text-indigo-500'}`}>
               <span className={`h-1.5 w-1.5 rounded-full animate-pulse ${chainType === 'solana' ? 'bg-teal' : 'bg-indigo-500'}`} />
-              {chainType === 'solana' ? 'Solana Devnet' : 'Ethereum Local'}
+              {chainType === 'solana' ? 'Surfpool Simnet' : 'Ethereum Local'}
             </div>
           )}
 

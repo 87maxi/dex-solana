@@ -115,7 +115,7 @@ describe("Solana DEX - Security Tests", () => {
         );
 
         // Create user token accounts
-        const [await Token.createAssociatedTokenAccount(
+        const userTokenAAccount = await Token.createAssociatedTokenAccount(
           provider.connection,
           ownerWallet.payer,
           tokenAKey,
@@ -123,7 +123,7 @@ describe("Solana DEX - Security Tests", () => {
         );
         userTokenAKey = userTokenAAccount;
 
-        const [await Token.createAssociatedTokenAccount(
+        const userTokenBAccount = await Token.createAssociatedTokenAccount(
           provider.connection,
           ownerWallet.payer,
           tokenBKey,
@@ -136,7 +136,7 @@ describe("Solana DEX - Security Tests", () => {
         await tokenB.mintTo(userTokenBAccount, ownerWallet.payer, [], new BN(20000000000));
 
         // Create DEX vault accounts
-        const [await Token.createAssociatedTokenAccount(
+        const dexTokenAAccount = await Token.createAssociatedTokenAccount(
           provider.connection,
           ownerWallet.payer,
           tokenAKey,
@@ -144,7 +144,7 @@ describe("Solana DEX - Security Tests", () => {
         );
         dexTokenAKey = dexTokenAAccount;
 
-        const [await Token.createAssociatedTokenAccount(
+        const dexTokenBAccount = await Token.createAssociatedTokenAccount(
           provider.connection,
           ownerWallet.payer,
           tokenBKey,
@@ -588,14 +588,14 @@ describe("Solana DEX - Security Tests", () => {
       );
 
       // Create token accounts for provider 2
-      const [await Token.createAssociatedTokenAccount(
+      const provider2TokenA = await Token.createAssociatedTokenAccount(
         provider.connection,
         ownerWallet.payer,
         tokenAKey,
         provider2Wallet.publicKey
       );
 
-      const [await Token.createAssociatedTokenAccount(
+      const provider2TokenB = await Token.createAssociatedTokenAccount(
         provider.connection,
         ownerWallet.payer,
         tokenBKey,

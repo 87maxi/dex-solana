@@ -138,7 +138,7 @@ describe("Solana DEX - Functional Tests", () => {
       );
 
       // Create user token account for token A
-      const [await Token.createAssociatedTokenAccount(
+      const userTokenAAccount = await Token.createAssociatedTokenAccount(
         provider.connection,
         ownerWallet.payer,
         tokenAKey,
@@ -171,7 +171,7 @@ describe("Solana DEX - Functional Tests", () => {
       );
 
       // Create user token account for token B
-      const [await Token.createAssociatedTokenAccount(
+      const userTokenBAccount = await Token.createAssociatedTokenAccount(
         provider.connection,
         ownerWallet.payer,
         tokenBKey,
@@ -198,7 +198,7 @@ describe("Solana DEX - Functional Tests", () => {
   describe("🔄 Add Liquidity Tests", () => {
     it("✅ Should add initial liquidity to the pool", async () => {
       // Create DEX vault accounts for token A and B
-      const [await Token.createAssociatedTokenAccount(
+      const dexTokenAAccount = await Token.createAssociatedTokenAccount(
         provider.connection,
         ownerWallet.payer,
         tokenAKey,
@@ -206,7 +206,7 @@ describe("Solana DEX - Functional Tests", () => {
       );
       dexTokenAKey = dexTokenAAccount;
 
-      const [await Token.createAssociatedTokenAccount(
+      const dexTokenBAccount = await Token.createAssociatedTokenAccount(
         provider.connection,
         ownerWallet.payer,
         tokenBKey,
@@ -215,7 +215,7 @@ describe("Solana DEX - Functional Tests", () => {
       dexTokenBKey = dexTokenBAccount;
 
       // Create user LP token account
-      const [await Token.createAssociatedTokenAccount(
+      const userLpTokenAccount = await Token.createAssociatedTokenAccount(
         provider.connection,
         ownerWallet.payer,
         lpMintKey,
@@ -452,14 +452,14 @@ describe("Solana DEX - Functional Tests", () => {
   describe("🏦 Protocol Fee Withdrawal Tests", () => {
     it("✅ Should allow owner to withdraw protocol fees", async () => {
       // Create owner token accounts for receiving fees
-      const [await Token.createAssociatedTokenAccount(
+      const ownerTokenAAccount = await Token.createAssociatedTokenAccount(
         provider.connection,
         ownerWallet.payer,
         tokenAKey,
         ownerWallet.publicKey
       );
 
-      const [await Token.createAssociatedTokenAccount(
+      const ownerTokenBAccount = await Token.createAssociatedTokenAccount(
         provider.connection,
         ownerWallet.payer,
         tokenBKey,

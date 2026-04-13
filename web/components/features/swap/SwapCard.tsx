@@ -3,10 +3,10 @@
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useAgnosticWallet } from "@/lib/agnostic-wallet-context";
+import { useAgnosticWallet } from "@/providers/AgnosticWalletProvider";
 import { fmt } from "@/lib/utils";
-import { DEXService } from "@/lib/dex-service";
-import { EVM_TOKEN_A_ADDRESS, EVM_TOKEN_B_ADDRESS } from "@/lib/contracts";
+import { DEXService } from "@/lib/services/dex-service";
+import { EVM_TOKEN_A_ADDRESS, EVM_TOKEN_B_ADDRESS } from "@/lib/config/contracts";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 
 export function SwapCard(): React.ReactNode {
