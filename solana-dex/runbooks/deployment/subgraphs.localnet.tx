@@ -1,0 +1,36 @@
+
+action "solana_dex_add_liquidity_event" "svm::deploy_subgraph" {
+    program_id = action.deploy_solana_dex.program_id
+    program_idl = action.deploy_solana_dex.program_idl
+    block_height = 0 // action.deploy_solana_dex.block_height
+    event {
+        name = "AddLiquidityEvent"
+    }
+}
+
+action "solana_dex_protocol_fees_withdrawn_event" "svm::deploy_subgraph" {
+    program_id = action.deploy_solana_dex.program_id
+    program_idl = action.deploy_solana_dex.program_idl
+    block_height = 0 // action.deploy_solana_dex.block_height
+    event {
+        name = "ProtocolFeesWithdrawnEvent"
+    }
+}
+
+action "solana_dex_remove_liquidity_event" "svm::deploy_subgraph" {
+    program_id = action.deploy_solana_dex.program_id
+    program_idl = action.deploy_solana_dex.program_idl
+    block_height = 0 // action.deploy_solana_dex.block_height
+    event {
+        name = "RemoveLiquidityEvent"
+    }
+}
+
+action "solana_dex_swap_event" "svm::deploy_subgraph" {
+    program_id = action.deploy_solana_dex.program_id
+    program_idl = action.deploy_solana_dex.program_idl
+    block_height = 0 // action.deploy_solana_dex.block_height
+    event {
+        name = "SwapEvent"
+    }
+}

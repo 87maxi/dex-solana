@@ -1,0 +1,101 @@
+# Surfpool Configuration for DEX Project
+version: "1.0"
+name: "solana-dex-deployment"
+description: "Deployment configuration for Solana DEX with Surfpool"
+
+# Environment settings
+environment:
+  name: "development"
+  network: "localnet"
+  chain: "solana"
+
+# Program deployment
+programs:
+  - name: "solana_dex"
+    program_id: "5p8iy2yZWb4xjHj17AAoZwAFzFY4Zh4c2e3dV32uRRH3"
+    path: "programs/solana-dex"
+    build_target: "program"
+    deployable: true
+
+# Accounts and configurations
+accounts:
+  - name: "config"
+    seeds:
+      - "config"
+    type: "Config"
+    initial_data:
+      owner: "5p8iy2yZWb4xjHj17AAoZwAFzFY4Zh4c2e3dV32uRRH3"
+      total_lp_supply: 0
+      total_fee: 30
+      protocol_fee: 10
+      lp_fee: 20
+      fee_denominator: 10000
+
+  - name: "pool"
+    seeds:
+      - "pool"
+    type: "Pool"
+    initial_data:
+      program_id: "5p8iy2yZWb4xjHj17AAoZwAFzFY4Zh4c2e3dV32uRRH3"
+      token_a_mint: "TokenAMintAddress"
+      token_b_mint: "TokenBMintAddress"
+      token_a_reserve: 0
+      token_b_reserve: 0
+      protocol_fee_a: 0
+      protocol_fee_b: 0
+
+# Token configurations
+tokens:
+  - name: "TA"
+    symbol: "TA"
+    decimals: 6
+    mint_address: "TokenAMintAddress"
+    initial_supply: 10000000
+
+  - name: "TB"
+    symbol: "TB"
+    decimals: 6
+    mint_address: "TokenBMintAddress"
+    initial_supply: 10000000
+
+# Deployment steps
+deployment:
+  steps:
+    - name: "Initialize program"
+      command: "anchor program deploy"
+      description: "Deploy the DEX program to the network"
+
+    - name: "Initialize tokens"
+      command: "solana program deploy tokens"
+      description: "Deploy and initialize token programs"
+
+    - name: "Create accounts"
+      command: "anchor run init-accounts"
+      description: "Initialize all required program accounts"
+
+    - name: "Mint tokens"
+      command: "anchor run mint-tokens"
+      description: "Mint initial tokens for testing"
+
+# Test configurations
+tests:
+  - name: "Swap functionality"
+    command: "anchor test --rpc-url http://127.0.0.1:8899"
+    description: "Test swap functionality with real accounts"
+
+  - name: "Liquidity tests"
+    command: "anchor test --rpc-url http://127.0.0.1:8899"
+    description: "Test liquidity pool functionality"
+
+# Monitoring
+monitoring:
+  enabled: true
+  metrics:
+    - name: "swap_volume"
+      description: "Total volume of swaps"
+      type: "counter"
+    - name: "liquidity_pool"
+      description: "Pool reserve balances"
+      type: "gauge"
+```
+<tool_call>

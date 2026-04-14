@@ -1,0 +1,112 @@
+# Surfpool Deployment Configuration
+version: "1.0"
+name: "solana-dex-deployment"
+description: "Deployment configuration for Solana DEX using Surfpool"
+
+# Network Configuration
+network:
+  name: "localnet"
+  url: "http://127.0.0.1:8899"
+  chain: "solana"
+  features:
+    - program_deployment
+    - account_initialization
+    - token_minting
+
+# Program Settings
+program:
+  name: "solana_dex"
+  program_id: "5p8iy2yZWb4xjHj17AAoZwAFzFY4Zh4c2e3dV32uRRH3"
+  source_dir: "programs/solana-dex"
+  build_target: "program"
+
+# Deployment Steps
+deployment_steps:
+  - name: "initialize_program"
+    description: "Deploy and initialize the DEX program"
+    command: "anchor deploy --url http://127.0.0.1:8899"
+    dependencies:
+      - "setup_environment"
+    timeout: 300
+
+  - name: "initialize_accounts"
+    description: "Create and initialize program accounts"
+    command: "anchor run init-accounts"
+    dependencies:
+      - "initialize_program"
+    timeout: 60
+
+  - name: "mint_tokens"
+    description: "Mint initial tokens for testing"
+    command: "anchor run mint-tokens"
+    dependencies:
+      - "initialize_accounts"
+    timeout: 60
+
+# Account Configuration
+accounts:
+  - name: "config"
+    seeds: ["config"]
+    type: "Config"
+    required: true
+
+  - name: "pool"
+    seeds: ["pool"]
+    type: "Pool"
+    required: true
+
+  - name: "lp_mint"
+    seeds: ["lp_mint"]
+    type: "LpMint"
+    required: true
+
+# Token Configuration
+tokens:
+  - name: "TA"
+    symbol: "TA"
+    decimals: 6
+    initial_supply: 10000000
+    mint_address: "TokenAMintAddress"
+
+  - name: "TB"
+    symbol: "TB"
+    decimals: 6
+    initial_supply: 10000000
+    mint_address: "TokenBMintAddress"
+
+# Test Configuration
+tests:
+  - name: "swap_functionality"
+    description: "Test swap functionality"
+    command: "anchor test --test-name swap --url http://127.0.0.1:8899"
+    timeout: 120
+
+  - name: "liquidity_pool"
+    description: "Test liquidity pool functionality"
+    command: "anchor test --test-name liquidity --url http://127.0.0.1:8899"
+    timeout: 120
+
+# Monitoring
+monitoring:
+  enabled: true
+  endpoints:
+    - path: "/metrics"
+      type: "prometheus"
+    - path: "/health"
+      type: "http"
+  alerts:
+    - name: "high_swap_volume"
+      threshold: 1000000
+      severity: "warning"
+    - name: "program_crash"
+      threshold: 0
+      severity: "critical"
+
+# Cleanup
+cleanup:
+  enabled: true
+  commands:
+    - "anchor run reset-program"
+    - "solana program delete"
+```
+<tool_call>
