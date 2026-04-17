@@ -105,7 +105,7 @@ describe("Solana DEX - Functional Tests", () => {
   describe("🚀 Initialization Tests", () => {
     it("✅ Should initialize the DEX program", async () => {
       // Initialize the DEX program
-      const tx = await program.methods.initialize().rpc();
+      const tx = await program.methods.initialize_pool(0, 0).rpc();
 
       // Verify the config account was created
       const configAccount = await program.account.config.fetch(configKey);
@@ -121,7 +121,7 @@ describe("Solana DEX - Functional Tests", () => {
     });
 
     it("❌ Should fail to initialize twice", async () => {
-      await expect(program.methods.initialize().rpc()).to.be.rejectedWith(
+      await expect(program.methods.initialize_pool(0, 0).rpc()).to.be.rejectedWith(
         "Account already initialized"
       );
     });

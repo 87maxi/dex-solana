@@ -1,19 +1,39 @@
-################################################################
-# Manage solana-dex deployment through Crypto Infrastructure as Code
-################################################################
+################################################################################
+# Solana DEX Deployment Runbook - Program Deployment Focus
+# Simplified runbook focusing on program deployment with Surfpool
+################################################################################
 
+# Addon configuration for SVM (Solana Virtual Machine)
 addon "svm" {
+    # These values are provided by the environment or defaults
     rpc_api_url = input.rpc_api_url
     network_id = input.network_id
 }
 
+# Signers configuration
+signer "payer" "svm::secret_key" {
+    description = "Payer account for all deployment costs"
+    keypair_json = "~/.config/solana/id.json"
+}
+
+signer "authority" "svm::secret_key" {
+    description = "Authority account for managing the DEX program"
+    keypair_json = "~/.config/solana/id.json"
+}
+
+# Action: Deploy the Solana DEX program
+# This is the main action that deploys the smart contract
 action "deploy_solana_dex" "svm::deploy_program" {
-    description = "Deploy solana_dex program"
-    program = svm::get_program_from_anchor_project("solana_dex") 
+    description = "Deploy the main solana_dex smart contract"
+    program = svm::get_program_from_anchor_project("solana_dex")
     authority = signer.authority
     payer = signer.payer
-    // Optional: if you want to deploy the program via a cheatcode when targeting a Surfnet, set `instant_surfnet_deployment = true`
-    // Deploying via a cheatcode will write the program data directly to the program account, rather than sending transactions.
-    // This will make deployments instantaneous, but is deviating from how the deployments will take place on devnet/mainnet.
-    // instant_surfnet_deployment = true
+
+    # For development with Surfnet, enable instant deployment
+    # This allows faster iteration without waiting for deployment
+    instant_surfnet_deployment = true
+
+    # Environment-specific configuration
+    # In production, this would be set to false for proper deployment timing
+    # instant_surfnet_deployment = env("INSTANT_DEPLOY") == "true"
 }

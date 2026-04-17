@@ -17,7 +17,8 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "DEX | Decentralized Exchange Protocol",
-  description: "Swap tokens, provide liquidity, and earn fees on a trustless AMM",
+  description:
+    "Swap tokens, provide liquidity, and earn fees on a trustless AMM",
 };
 
 export default function RootLayout({

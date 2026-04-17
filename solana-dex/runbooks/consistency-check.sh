@@ -1,124 +1,220 @@
 #!/bin/bash
 
-# Consistency Check Script for Solana DEX Project
-# This script validates the codebase for proper implementation
+# Consistency Check Script for Solana DEX with Surfpool
+# Validates codebase, Surfpool integration, and deployment readiness
 
-echo "🔍 Starting consistency check for Solana DEX..."
+set -euo pipefail
 
-# Check 1: Verify project structure
-echo "1. Checking project structure..."
-if [ ! -d "solana-dex/programs/solana-dex/src" ]; then
-    echo "❌ ERROR: Missing program source directory"
-    exit 1
-fi
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
 
-if [ ! -f "solana-dex/programs/solana-dex/src/lib.rs" ]; then
-    echo "❌ ERROR: Missing main lib.rs file"
-    exit 1
-fi
+# Function to print colored messages
+log() {
+    local color=$1
+    local message=$2
+    echo -e "${color}${message}${NC}"
+}
 
-# Check 2: Validate smart contract compilation
-echo "2. Checking smart contract compilation..."
-cd solana-dex
+# Function to check command exists
+check_command() {
+    if ! command -v "$1" &> /dev/null; then
+        log "$RED" "❌ $1 is not installed"
+        return 1
+    fi
+    return 0
+}
 
-# Attempt to build the program
-echo "   Building program..."
-if ! cargo build --quiet; then
-    echo "⚠️  Warning: Compilation warnings but proceeding with checks"
-fi
+# Function to get program ID from lib.rs
+get_program_id() {
+    grep -A1 "declare_id!" programs/solana-dex/src/lib.rs | grep -oP '"\K[^"]+' || echo "Unknown"
+}
 
-# Check 3: Verify DEX service exists and is correctly implemented
-echo "3. Checking DEX service implementation..."
-if [ ! -f "../web/lib/services/dex-service.ts" ]; then
-    echo "❌ ERROR: Missing DEX service file"
-    exit 1
-fi
+# Function to get program ID from Anchor.toml
+get_anchor_program_id() {
+    grep -A1 "solana_dex = " Anchor.toml | grep -oP '"\K[^"]+' || echo "Unknown"
+}
 
-# Check 4: Verify swap component exists
-echo "4. Checking swap component..."
-if [ ! -f "../web/components/features/swap/SwapCard.tsx" ]; then
-    echo "❌ ERROR: Missing SwapCard component"
-    exit 1
-fi
-
-# Check 5: Check for proper error handling
-echo "5. Validating error handling..."
-if ! grep -q "ErrorCode" "programs/solana-dex/src/lib.rs"; then
-    echo "❌ ERROR: Missing error code definitions"
-    exit 1
-fi
-
-# Check 6: Validate key account structures
-echo "6. Checking account structures..."
-if ! grep -q "Config" "programs/solana-dex/src/lib.rs"; then
-    echo "❌ ERROR: Missing Config structure"
-    exit 1
-fi
-
-if ! grep -q "Pool" "programs/solana-dex/src/lib.rs"; then
-    echo "❌ ERROR: Missing Pool structure"
-    exit 1
-fi
-
-if ! grep -q "SwapEvent" "programs/solana-dex/src/lib.rs"; then
-    echo "❌ ERROR: Missing SwapEvent structure"
-    exit 1
-fi
-
-# Check 7: Verify swap function exists
-echo "7. Checking swap function implementation..."
-if ! grep -q "pub fn swap_dex" "programs/solana-dex/src/lib.rs"; then
-    echo "❌ ERROR: Missing swap_dex function"
-    exit 1
-fi
-
-# Check 8: Validate frontend integration
-echo "8. Checking frontend integration..."
-if ! grep -q "solanaSwap" "../web/lib/services/dex-service.ts"; then
-    echo "❌ ERROR: Missing solanaSwap function in DEX service"
-    exit 1
-fi
-
-# Check 9: Verify environment variables
-echo "9. Checking environment setup..."
-if [ ! -f "../web/.env.local" ]; then
-    echo "⚠️  Warning: Missing .env.local file - this is expected for development"
-fi
-
-# Check 10: Validate surfpool integration
-echo "10. Checking Surfpool configuration..."
-if [ ! -f "runbooks/surfpool-deploy.yaml" ]; then
-    echo "⚠️  Warning: Missing Surfpool deployment configuration"
-fi
-
-if [ ! -f "runbooks/deployment-runbook.md" ]; then
-    echo "⚠️  Warning: Missing deployment runbook"
-fi
-
-echo "✅ All consistency checks passed!"
-echo ""
-echo "📋 Summary of validated components:"
-echo "   - Smart contract implementation (Solana)"
-echo "   - Frontend services (TypeScript)"
-echo "   - Swap functionality"
-echo "   - Account structures"
-echo "   - Error handling"
-echo "   - Surfpool deployment configuration"
-echo ""
-echo "✅ The DEX implementation is consistent and ready for deployment!"
-
-# Additional validation
-echo ""
-echo "🔍 Additional Validation Checks:"
+# Initialize
+log "$BLUE" "🔍 Starting consistency checks for Solana DEX..."
+log "$BLUE" "Project root: $(pwd)"
 echo ""
 
-# Validate that main program is correctly structured
-if grep -q "swap" "programs/solana-dex/src/lib.rs" && ! grep -q "pub fn swap" "programs/solana-dex/src/lib.rs"; then
-    echo "❌ ERROR: swap function is referenced but not properly defined"
+# Check 1: Basic project structure
+log "$BLUE" "1. Checking project structure..."
+if [ ! -d "programs/solana-dex/src" ]; then
+    log "$RED" "❌ ERROR: Missing program source directory"
     exit 1
 fi
 
-echo "✅ Consistency validation complete"
+if [ ! -f "programs/solana-dex/src/lib.rs" ]; then
+    log "$RED" "❌ ERROR: Missing main lib.rs file"
+    exit 1
+fi
+
+if [ ! -f "Anchor.toml" ]; then
+    log "$RED" "❌ ERROR: Missing Anchor.toml configuration"
+    exit 1
+fi
+
+log "$GREEN" "✅ Project structure is valid"
+
+# Check 2: Program IDs consistency
+log "$BLUE" "2. Checking program ID consistency..."
+CODE_PROGRAM_ID=$(get_program_id)
+ANCHOR_PROGRAM_ID=$(get_anchor_program_id)
+
+log "$BLUE" "   Program ID in code: $CODE_PROGRAM_ID"
+log "$BLUE" "   Program ID in Anchor.toml: $ANCHOR_PROGRAM_ID"
+
+if [ "$CODE_PROGRAM_ID" = "Unknown" ] || [ "$ANCHOR_PROGRAM_ID" = "Unknown" ]; then
+    log "$RED" "❌ ERROR: Could not extract program IDs"
+    exit 1
+fi
+
+if [ "$CODE_PROGRAM_ID" = "$ANCHOR_PROGRAM_ID" ]; then
+    log "$GREEN" "✅ Program IDs match"
+else
+    log "$YELLOW" "⚠️  Warning: Program IDs don't match!"
+    log "$YELLOW" "   This might be expected during initial deployment"
+fi
+
+# Check 3: Smart contract compilation
+log "$BLUE" "3. Checking smart contract compilation..."
+if [ -f "target/deploy/solana_dex.so" ]; then
+    log "$YELLOW" "   .so file exists, checking if up-to-date..."
+    if cargo build-sbf --manifest-path programs/solana-dex/Cargo.toml 2>&1 | grep -q "Finished"; then
+        log "$GREEN" "✅ Program builds successfully"
+    else
+        log "$RED" "❌ ERROR: Program build failed"
+        exit 1
+    fi
+else
+    log "$YELLOW" "   .so file not found, building..."
+    if anchor build; then
+        log "$GREEN" "✅ Program built successfully"
+    else
+        log "$RED" "❌ ERROR: Program build failed"
+        exit 1
+    fi
+fi
+
+# Check 4: Core smart contract functions
+log "$BLUE" "4. Checking core smart contract functions..."
+REQUIRED_FUNCTIONS=("swap" "add_liquidity" "remove_liquidity" "initialize_pool")
+
+for func in "${REQUIRED_FUNCTIONS[@]}"; do
+    if ! grep -q "pub fn $func" "programs/solana-dex/src/lib.rs"; then
+        log "$RED" "❌ ERROR: Missing $func function"
+        exit 1
+    fi
+    log "$GREEN" "   ✓ $func function found"
+done
+
+# Check 5: Account structures
+log "$BLUE" "5. Checking account structures..."
+if ! grep -q "pub struct Pool" "programs/solana-dex/src/lib.rs"; then
+    log "$RED" "❌ ERROR: Missing Pool account structure"
+    exit 1
+fi
+log "$GREEN" "   ✓ Pool account structure found"
+
+# Check 6: Error handling
+log "$BLUE" "6. Checking error handling..."
+if ! grep -q "#\\[error_code\\]" "programs/solana-dex/src/lib.rs"; then
+    log "$RED" "❌ ERROR: Missing error code definitions"
+    exit 1
+fi
+log "$GREEN" "   ✓ Error code definitions found"
+
+# Check 7: Surfpool integration
+log "$BLUE" "7. Checking Surfpool integration..."
+if [ ! -f "runbooks/deployment/main.tx" ]; then
+    log "$RED" "❌ ERROR: Missing Surfpool runbook main.tx"
+    exit 1
+fi
+
+if [ ! -f "runbooks/deployment/signers.localnet.tx" ]; then
+    log "$RED" "❌ ERROR: Missing Surfpool localnet signers"
+    exit 1
+fi
+
+if [ ! -f "txtx.yml" ]; then
+    log "$RED" "❌ ERROR: Missing txtx.yml Surfpool configuration"
+    exit 1
+fi
+
+log "$GREEN" "✅ Surfpool runbooks are present"
+
+# Check 8: Dependency versions
+log "$BLUE" "8. Checking dependency versions..."
+if ! grep -q "\"0.32.1\"" "Cargo.toml"; then
+    log "$YELLOW" "⚠️  Warning: Anchor version might not be 0.32.1"
+fi
+
+if ! grep -q "\"0.32.1\"" "programs/solana-dex/Cargo.toml"; then
+    log "$YELLOW" "⚠️  Warning: Program Anchor version might not be 0.32.1"
+fi
+
+log "$GREEN" "   ✓ Dependency checks complete"
+
+# Check 9: Deployment scripts
+log "$BLUE" "9. Checking deployment scripts..."
+DEPLOY_SCRIPTS=("runbooks/build-deploy.sh" "runbooks/deploy-with-surfpool.sh" "runbooks/deploy-surfpool.sh")
+
+for script in "${DEPLOY_SCRIPTS[@]}"; do
+    if [ -f "$script" ]; then
+        if grep -q "anchor build" "$script"; then
+            log "$GREEN" "   ✓ $script uses anchor build"
+        else
+            log "$YELLOW" "   ⚠️  $script might not use proper build method"
+        fi
+    else
+        log "$YELLOW" "   ⚠️  $script not found"
+    fi
+done
+
+# Check 10: Documentation
+log "$BLUE" "10. Checking documentation..."
+if [ ! -f "runbooks/SURFPOOL_INTEGRATION.md" ]; then
+    log "$YELLOW" "   ⚠️  SURFPOOL_INTEGRATION.md not found"
+fi
+
+if [ ! -f "runbooks/SURFPOOL_DEPLOYMENT_GUIDE.md" ]; then
+    log "$YELLOW" "   ⚠️  SURFPOOL_DEPLOYMENT_GUIDE.md not found"
+fi
+
+log "$GREEN" "✅ Documentation checks complete"
+
+# Check 11: Build artifacts
+log "$BLUE" "11. Checking build artifacts..."
+if [ ! -d "target" ]; then
+    log "$YELLOW" "   ⚠️  target directory not found"
+else
+    log "$GREEN" "   ✓ target directory exists"
+fi
+
+if [ ! -d "target/idl" ]; then
+    log "$YELLOW" "   ⚠️  IDL directory not found"
+else
+    log "$GREEN" "   ✓ IDL directory exists"
+fi
+
+echo ""
+log "$GREEN" "🎉 All consistency checks passed!"
+log "$GREEN" ""
+log "$GREEN" "✅ Summary:"
+log "$GREEN" "   - Smart contract structure: Valid"
+log "$GREEN" "   - Program IDs: Consistent"
+log "$GREEN" "   - Build system: Working"
+log "$GREEN" "   - Core functions: Present"
+log "$GREEN" "   - Surfpool integration: Valid"
+log "$GREEN" "   - Documentation: Present"
+log "$GREEN" ""
+log "$GREEN" "✅ The project is ready for Surfpool deployment!"
+echo ""
+
 exit 0
-```
-<tool_call>

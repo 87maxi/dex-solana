@@ -1,68 +1,178 @@
-import { Connection, PublicKey } from "@solana/web3.js";
+import { PublicKey, Connection } from "@solana/web3.js";
+import { WalletAdapter } from "@solana/wallet-adapter-base";
 import { Program, AnchorProvider } from "@coral-xyz/anchor";
-import { DEX_PROGRAM_ID } from "@/lib/config/contracts";
-import { IDL } from "@/lib/types/solana-dex-types";
+import {
+  TOKEN_PROGRAM_ID,
+  TokenAccount,
+  ASSOCIATED_TOKEN_PROGRAM_ID,
+  Token,
+} from "@solana/spl-token";
+import { IDL } from "@/lib/types/solana-dex";
 
 export class DEXService {
-    /**
-     * Solana Swap Logic - Proper implementation example
-     */
-    static async solanaSwap(
-        wallet: any,
-        connection: Connection,
-        amountIn: bigint,
-        isAtoB: boolean,
-    ) {
-        try {
-            // Create provider
-            const provider = new AnchorProvider(
-                connection,
-                wallet,
-                AnchorProvider.defaultOptions(),
-            );
-            const program = new Program(IDL, provider);
+  static async solanaSwap(
+    wallet: WalletAdapter,
+    connection: Connection,
+    amount: bigint,
+    tokenInIsA: boolean,
+  ): Promise<string> {
+    try {
+      // Create provider
+      const provider = new AnchorProvider(connection, wallet, {});
 
-            // Find program addresses (these should be properly computed)
-            const [configKey] = PublicKey.findProgramAddressSync(
-                [Buffer.from("config")],
-                program.programId,
-            );
+      // Create program instance
+      const program = new Program(IDL, provider);
 
-            const [poolKey] = PublicKey.findProgramAddressSync(
-                [Buffer.from("pool")],
-                program.programId,
-            );
+      // Get program address (this should match the one in your Anchor.toml)
+      const programId = new PublicKey(
+        "5p8iy2yZWb4xjHj17AAoZwAFzFY4Zh4c2e3dV32uRRH3",
+      );
 
-            // This is what SHOULD happen in a real implementation:
-            // 1. Get actual user token accounts from wallet
-            // 2. Get actual vault accounts for the tokens
-            // 3. Execute the transaction with correct accounts
+      // In a real implementation, these would be fetched from the program state
+      // For now, these are placeholders
+      const poolAddress = PublicKey.findProgramAddressSync(
+        [
+          Buffer.from("pool"),
+          new PublicKey("TokenA_Mint_Address").toBytes(),
+          new PublicKey("TokenB_Mint_Address").toBytes()
+        ],
+        programId
+      )[0];
 
-            console.log(
-                `Executing Solana swap: ${amountIn} tokens via ${DEX_PROGRAM_ID}`,
-            );
-            console.log(`isAtoB: ${isAtoB}`);
+      // In a real implementation, these would be fetched from the program state
+      const userTokenIn = new PublicKey("..."); // Should be fetched from wallet
+      const userTokenOut = new PublicKey("..."); // Should be fetched from wallet
+      const dexTokenIn = new PublicKey("..."); // Should be fetched from program
+      const dexTokenOut = new PublicKey("..."); // Should be fetched from program
 
-            // In a real scenario this would be the transaction that executes the swap
-            // This is just a demonstration of the proper structure
-            return "simulated-tx-id";
-        } catch (err) {
-            console.error("DexService Error:", err);
-            throw err;
-        }
+      // Create transaction
+      const tx = await program.methods
+        .swap(tokenInIsA ? 0 : 1, amount)
+        .accounts({
+          pool: poolAddress,
+          userTokenIn,
+          userTokenOut,
+          dexTokenIn,
+          dexTokenOut,
+          user: wallet.publicKey,
+          tokenProgram: TOKEN_PROGRAM_ID,
+        })
+        .signers([])
+        .rpc();
+
+      return tx;
+    } catch (error) {
+      console.error("Swap error:", error);
+      throw error;
     }
+  }
 
-    /**
-     * EVM Swap Logic - Placeholder for now
-     */
-    static async evmSwap(address: string, tokenIn: string, amountIn: bigint) {
-        if (typeof window === "undefined" || !window.ethereum)
-            throw new Error("No ethereum wallet");
+  static async solanaAddLiquidity(
+    wallet: WalletAdapter,
+    connection: Connection,
+    amountA: bigint,
+    amountB: bigint,
+  ): Promise<string> {
+    try {
+      const provider = new AnchorProvider(connection, wallet, {});
+      const program = new Program(IDL, provider);
 
-        // This would be implemented when EVM contracts are properly deployed
-        console.log(
-            `EVM swap called with token: ${tokenIn}, amount: ${amountIn}`,
-        );
-        return "mock-evm-tx-id-67890";
+      const programId = new PublicKey(
+        "5p8iy2yZWb4xjHj17AAoZwAFzFY4Zh4c2e3dV32uRRH3",
+      );
+
+      // In a real implementation, these would be properly fetched from the program
+      const poolAddress = PublicKey.findProgramAddressSync(
+        [
+          Buffer.from("pool"),
+          new PublicKey("TokenA_Mint_Address").toBytes(),
+          new PublicKey("TokenB_Mint_Address").toBytes()
+        ],
+        programId
+      )[0];
+
+      const lpMint = new PublicKey("..."); // LP token mint
+      const userTokenA = new PublicKey("..."); // User's token A account
+      const userTokenB = new PublicKey("..."); // User's token B account
+      const dexTokenA = new PublicKey("..."); // DEX token A vault
+      const dexTokenB = new PublicKey("..."); // DEX token B vault
+      const userLp = new PublicKey("..."); // User's LP token account
+
+      const tx = await program.methods
+        .addLiquidity(amountA, amountB)
+        .accounts({
+          pool: poolAddress,
+          lpMint,
+          userTokenA,
+          userTokenB,
+          dexTokenA,
+          dexTokenB,
+          userLp,
+          user: wallet.publicKey,
+          tokenProgram: TOKEN_PROGRAM_ID,
+        })
+        .signers([])
+        .rpc();
+
+      return tx;
+    } catch (error) {
+      console.error("Add liquidity error:", error);
+      throw error;
     }
+  }
+
+  static async solanaRemoveLiquidity(
+    wallet: WalletAdapter,
+    connection: Connection,
+    lpAmount: bigint,
+  ): Promise<string> {
+    try {
+      const provider = new AnchorProvider(connection, wallet, {});
+      const program = new Program(IDL, provider);
+
+      const programId = new PublicKey(
+        "5p8iy2yZWb4xjHj17AAoZwAFzFY4Zh4c2e3dV32uRRH3",
+      );
+
+      // In a real implementation, these would be properly fetched from the program
+      const poolAddress = PublicKey.findProgramAddressSync(
+        [
+          Buffer.from("pool"),
+          new PublicKey("TokenA_Mint_Address").toBytes(),
+          new PublicKey("TokenB_Mint_Address").toBytes()
+        ],
+        programId
+      )[0];
+
+      const lpMint = new PublicKey("..."); // LP token mint
+      const userTokenA = new PublicKey("..."); // User's token A account
+      const userTokenB = new PublicKey("..."); // User's token B account
+      const dexTokenA = new PublicKey("..."); // DEX token A vault
+      const dexTokenB = new PublicKey("..."); // DEX token B vault
+      const userLp = new PublicKey("..."); // User's LP token account
+
+      const tx = await program.methods
+        .removeLiquidity(lpAmount)
+        .accounts({
+          pool: poolAddress,
+          lpMint,
+          userTokenA,
+          userTokenB,
+          dexTokenA,
+          dexTokenB,
+          userLp,
+          user: wallet.publicKey,
+          tokenProgram: TOKEN_PROGRAM_ID,
+        })
+        .signers([])
+        .rpc();
+
+      return tx;
+    } catch (error) {
+      console.error("Remove liquidity error:", error);
+      throw error;
+    }
+  }
 }
+```
+<tool_call>
