@@ -152,6 +152,3 @@ Se intento usar ethers.js como reemplazo de wagmi. Funcionaba pero el usuario pi
 
 ---
 
-**Autor**: jviejo
-**Asistente**: Claude Opus 4.6 (1M context)
-**Fecha**: 2026-03-23
